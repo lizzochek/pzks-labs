@@ -12,7 +12,31 @@ function resetAllRules(machinesList) {
   });
 }
 
+const reservedWords = [
+  'sin',
+  'cos',
+  'tan',
+  'ctg',
+  'pi',
+  'sqrt',
+  'acos',
+  'asin',
+  'e',
+  'log',
+  'lg',
+  'ln',
+];
+
+const priorities = {
+  '*': 1,
+  '/': 1,
+  '+': 2,
+  '-': 2,
+};
+
 module.exports = {
   getActiveName,
   resetAllRules,
+  reservedWords,
+  priorities,
 };
