@@ -2,7 +2,8 @@ const { treeBuilder } = require('./tree-builder');
 const { lexicalAnaliser } = require('../lab1/lexicalAnaliser');
 const { printTree } = require('./helpers');
 
-const expression = 'a/b/c/d/e/f';
+const expression = '(a-b-c-d-e-f-g)' // => a / (b * c * d * e * f)
+// '(a-b-c-d-e-f)' // => a - (b + c + d + e + f);
 // 'a/b+c/d+(e/f)';
 // '(A+B)+C/D+G+(K/L+M+N)';
 //

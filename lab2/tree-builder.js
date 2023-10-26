@@ -5,10 +5,20 @@ const treeBuilder = (expression) => {
     const signs = expression.filter((el) => el.token === 'sign');
     const areAllDivide = signs.every((el) => el.lexeme === '/');
     const areAllMinus = signs.every((el) => el.lexeme === '-');
-    if (areAllDivide || areAllMinus)
-      return `Oops! Expression cannot contain only / or -. Please change at least ${Math.floor(
-        expression.length / 4
-      )} signs`;
+    if (areAllDivide || areAllMinus) {
+      const firstSign = expression.find((el) => el.token === 'sign');
+      expression.splice(firstSign.position + 1, 0, {
+        token: 'leftBracket',
+        lexeme: '(',
+        priority: null,
+      });
+      expression.push({ token: 'rightBracket', lexeme: ')', priority: null });
+      expression.forEach((el, ind) => (el.position = ind));
+      signs.forEach((sign, ind) => {
+        if (ind > 0)
+          expression[sign.position].lexeme = areAllDivide ? '*' : '+';
+      });
+    }
 
     const [split] = splitBrackets(expression, 0);
     const tree = createTree(split);
